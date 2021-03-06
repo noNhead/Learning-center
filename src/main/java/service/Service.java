@@ -32,7 +32,7 @@ public class Service {
                     createAndAddCourse();
                     break;
                 case("choose student"):
-                    System.out.println("choosing added student");
+                    System.out.println("Choosing added student");
                     List<Student> students = studentListSelect();
                     Student student = studentSelect(students);
                     if (student == null) {
@@ -40,6 +40,8 @@ public class Service {
                     }
                     studentProfileManagement(student);
                     break;
+				case("gpa rate"):
+					System.out.println("Composing a list of students by average score...");
             }
         } while (!exitFlag);
         return 0;
@@ -51,11 +53,14 @@ public class Service {
         switch (entered) {
             case ("gpa"):
                 System.out.println("Student's current GPA: " + student.getAverageScore());
+				break;
             case ("ttf"):
-                System.out.println("Time left until the end of the program: ");
-            case("poe"):
-                System.out.println("Probability of expulsion: ");
-        }
+                System.out.println("Time left until the end of the program: " + student.getHoursSummaryThemesRemainder / 8 + " days " + student.getHoursSummaryThemesRemainder%8 + " hours");
+				break;
+			case("poe"):
+                System.out.println("Success rate: " + student.getAverageScore() * 20 + "\%");
+				break;
+		}
     }
 
     private void createAndAddCourse(){
@@ -108,5 +113,11 @@ public class Service {
         }
         return null;
     }
+	
+	private List<Student> studentSortByGpa() {
+		return Collection.sort(database.getStudent() -> new Comparator(Student s1, Student s2) {
+			return s1.getAverageScore().compareTo(s2.getAverageScore());
+		});
+	}
 }
 

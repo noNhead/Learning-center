@@ -10,14 +10,16 @@ public class Student {
     private Course course;
     private Map<String, Integer> marks;
     private double averageScore;
+	private int hoursSummaryThemesRemainder;
 
-    public Student(String name, String surname, Timestamp startDate, Course course, Map<String, Integer> marks, double averageScore) {
+    public Student(String name, String surname, Timestamp startDate, Course course, Map<String, Integer> marks, double averageScore, int hoursSummaryThemesRemainder) {
         this.name = name;
         this.surname = surname;
         this.startDate = startDate;
         this.course = course;
         this.marks = marks;
         this.averageScore = averageScore;
+		this.hoursSummaryThemesRemainder = hoursSummaryThemesRemainder;
     }
 
     public Student() {
@@ -78,7 +80,15 @@ public class Student {
     public void setAverageScore(double averageScore) {
         this.averageScore = averageScore;
     }
+	
+	public int getHoursSummaryThemesRemainder() {
+		return hoursSummaryThemesRemainder;
+	}
 
+	public void setHoursSummaryThemesRemainder(int hoursSummaryThemesRemainder) {
+		this.hoursSummaryThemesRemainder = hoursSummaryThemesRemainder;
+	}
+	
     @Override
     public String toString() {
         return "Student{" +
