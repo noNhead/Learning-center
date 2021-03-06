@@ -2,7 +2,6 @@ package entity;
 
 import java.sql.Timestamp;
 import java.util.Map;
-import java.util.Objects;
 
 public class Student {
     private String name;
@@ -10,13 +9,15 @@ public class Student {
     private Timestamp startDate;
     private Course course;
     private Map<String, Integer> marks;
+    private double averageScore;
 
-    public Student(String name, String surname, Timestamp startDate, Course course, Map<String, Integer> marks) {
+    public Student(String name, String surname, Timestamp startDate, Course course, Map<String, Integer> marks, double averageScore) {
         this.name = name;
         this.surname = surname;
         this.startDate = startDate;
         this.course = course;
         this.marks = marks;
+        this.averageScore = averageScore;
     }
 
     public Student() {
@@ -68,6 +69,14 @@ public class Student {
         for (String key : this.marks.keySet()) {
             this.marks.replace(key, -1);
         }
+    }
+
+    public double getAverageScore() {
+        return averageScore;
+    }
+
+    public void setAverageScore(double averageScore) {
+        this.averageScore = averageScore;
     }
 
     @Override

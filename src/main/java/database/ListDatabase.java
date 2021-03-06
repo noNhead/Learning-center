@@ -4,6 +4,7 @@ import entity.Course;
 import entity.Student;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ListDatabase {
     private List<Student> students;
@@ -36,5 +37,9 @@ public class ListDatabase {
 
     public void addCourse(Course course){
         this.courses.add(course);
+    }
+
+    public List<Student> getStudent(String name, String surname) {
+        return this.students.stream().filter(item -> item.getName().equalsIgnoreCase(name) && item.getSurname().equalsIgnoreCase(surname)).collect(Collectors.toList());
     }
 }
