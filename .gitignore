@@ -27,3 +27,7 @@ hs_err_pid*
 
 # Db files
 resources
+
+target/classes/courses.txt
+
+target/classes/students.txt
