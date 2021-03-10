@@ -33,4 +33,12 @@ public class Course {
     public void addTheme(String string, Integer duration) {
         this.themes.put(string, duration);
     }
+
+    public long getSummaryCourseTime() {
+        long summaryDuration = 0;
+        for (long duration: themes.values()) {
+            summaryDuration+=duration;
+        }
+        return summaryDuration;
+    }
 }

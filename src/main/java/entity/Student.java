@@ -1,25 +1,26 @@
 package entity;
 
-import java.sql.Timestamp;
-import java.util.Map;
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 public class Student {
     private String name;
     private String surname;
-    private Timestamp startDate;
-    private Course course;
-    private Map<String, Integer> marks;
+    private ZonedDateTime startDate;
+    private String course;
+    private List<Integer> marks;
     private double averageScore;
-	private int hoursSummaryThemesRemainder;
+    private long summaryDurability;
 
-    public Student(String name, String surname, Timestamp startDate, Course course, Map<String, Integer> marks, double averageScore, int hoursSummaryThemesRemainder) {
+    public Student(String name, String surname, ZonedDateTime startDate, String course, List<Integer> marks, double averageScore, long summaryDurability) {
         this.name = name;
         this.surname = surname;
         this.startDate = startDate;
         this.course = course;
         this.marks = marks;
         this.averageScore = averageScore;
-		this.hoursSummaryThemesRemainder = hoursSummaryThemesRemainder;
+        this.summaryDurability = summaryDurability;
     }
 
     public Student() {
@@ -41,36 +42,33 @@ public class Student {
         this.surname = surname;
     }
 
-    public Timestamp getStartDate() {
+    public ZonedDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Timestamp startDate) {
+    public void setStartDate(ZonedDateTime startDate) {
         this.startDate = startDate;
     }
 
-    public Course getCourse() {
+    public String getCourse() {
         return course;
     }
 
-    public void setCourse(Course course) {
+    public void setCourse(String course) {
         this.course = course;
         firstSetMarks();
     }
 
-    public Map<String, Integer> getMarks() {
+    public List<Integer> getMarks() {
         return marks;
     }
 
-    public void setMarks(Map<String, Integer> marks) {
+    public void setMarks(List<Integer> marks) {
         this.marks = marks;
     }
 
     private void firstSetMarks(){
-        this.marks = this.course.getThemes();
-        for (String key : this.marks.keySet()) {
-            this.marks.replace(key, -1);
-        }
+        this.marks = null;
     }
 
     public double getAverageScore() {
@@ -81,22 +79,22 @@ public class Student {
         this.averageScore = averageScore;
     }
 	
-	public int getHoursSummaryThemesRemainder() {
-		return hoursSummaryThemesRemainder;
-	}
+    public long getHoursSummaryThemesRemainder() {
+        ZonedDateTime calculatedZonedTime = this.startDate;
+        calculatedZonedTime.plusHours(getSummaryDurability());
+        return ChronoUnit.HOURS.between(ZonedDateTime.now(), calculatedZonedTime);
+    }
 
-	public void setHoursSummaryThemesRemainder(int hoursSummaryThemesRemainder) {
-		this.hoursSummaryThemesRemainder = hoursSummaryThemesRemainder;
-	}
-	
+    public long getSummaryDurability() {
+        return summaryDurability;
+    }
+
+    public void setSummaryDurability(long summaryDurability) {
+        this.summaryDurability = summaryDurability;
+    }
+
     @Override
     public String toString() {
-        return "Student{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", startDate=" + startDate +
-                ", course=" + course +
-                ", marks=" + marks +
-                '}';
+        return "GPA: " + getAverageScore() +  " | " + getHoursSummaryThemesRemainder() + "|" + name + " " + surname;
     }
 }
