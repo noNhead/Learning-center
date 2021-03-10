@@ -27,19 +27,11 @@ public class Service {
             String entered = in.nextLine();
             switch (entered) {
                 case ("help"):
-                    System.out.println();
+                    System.out.println("exit: closing the app\nchoose student: choice of a specific student\ngpa rate: rating of all students according to the average score\nttf rate: ranking of all students by graduation date");
                     break;
                 case("exit"):
                     System.out.println("exiting...");
                     System.exit(0);
-                    break;
-                case("add student"):
-                    System.out.println("Creating student");
-                    createAndAddStudent();
-                    break;
-                case("add course"):
-                    System.out.println("Creating course");
-                    createAndAddCourse();
                     break;
                 case("choose student"):
                     System.out.println("Choosing added student");
@@ -86,33 +78,6 @@ public class Service {
                     break;
             }
         } while (!backFlag);
-    }
-
-    private void createAndAddCourse(){
-        System.out.println("Enter the name of the course: ");
-        String title = in.nextLine();
-        Map<String, Integer> themes = new HashMap<>();
-        int length = 2;
-        for (int i = 0; i < length; i++) {
-            System.out.println("Enter the title of the topic: ");
-            String theme = in.nextLine();
-            System.out.println("Enter the duration of the topic: ");
-            int duration = Integer.parseInt(in.nextLine());
-            themes.put(theme, duration);
-        }
-        Course course = new Course(title, themes);
-        listDatabase.addCourse(course);
-    }
-
-    private void createAndAddStudent(){
-        Student student = new Student();
-        System.out.println("Enter the name student: ");
-        student.setName(in.nextLine());
-        System.out.println("Enter the surname student: ");
-        student.setSurname(in.nextLine());
-        student.setStartDate(ZonedDateTime.now());
-        System.out.println("Choose a course or create a new one (0 - create a new course): ");
-        listDatabase.writeAllTitleCourse();
     }
 
     private List<Student> studentListSelect(){

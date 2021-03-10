@@ -13,8 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class DbFileReader {
-    ListDatabase listDatabase = new ListDatabase(new ArrayList<>(), new ArrayList<>());
-
     public List<Course> dbWriterCourse() throws IOException {
         FileReader fileReader = new FileReader("src/main/resources/courses.txt");
         BufferedReader bufferedReader = new BufferedReader(fileReader);
