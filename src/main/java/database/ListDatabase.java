@@ -4,6 +4,7 @@ import entity.Course;
 import entity.Student;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ListDatabase {
@@ -15,6 +16,10 @@ public class ListDatabase {
         this.courses = courses;
     }
 
+    public ListDatabase() {
+
+    }
+
     public List<Student> getStudents() {
         return students;
     }
@@ -23,16 +28,8 @@ public class ListDatabase {
         this.students = students;
     }
 
-    public List<Course> getCourses() {
-        return courses;
-    }
-
     public void setCourses(List<Course> courses) {
         this.courses = courses;
-    }
-
-    public void addStudent(Student student){
-        this.students.add(student);
     }
 
     public void addCourse(Course course){
@@ -41,5 +38,17 @@ public class ListDatabase {
 
     public List<Student> getStudent(String name, String surname) {
         return this.students.stream().filter(item -> item.getName().equalsIgnoreCase(name) && item.getSurname().equalsIgnoreCase(surname)).collect(Collectors.toList());
+    }
+
+    public List<Course> getCourse(String title) {
+        return this.courses.stream().filter(item -> item.getTitle().equalsIgnoreCase(title)).collect(Collectors.toList());
+    }
+
+    public void writeAllTitleCourse() {
+        int i = 1;
+        for (Course course: this.courses) {
+            System.out.println(i + ". " +course.getTitle());
+            i++;
+        }
     }
 }
